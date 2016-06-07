@@ -128,7 +128,56 @@ Again, quite simple here. We have an override for the intro paragraph (perhaps a
 
 Another nice benefit you might have noticed while reading is the use of ids. A lot of the time, people will tell you not to use ids, just because it's possible to use them wrong where it's not possible with classes. But ids serve a few needs here. First, they force you to think about re-use, which is hugely important. If you find yourself putting more than one id on a page (which is invalid html), you know you might have categorized incorrectly and should re-organize. The ids also act almost as headlines within your stylesheets. They sit at the base or second level consistently, and are used as categories. It's much quicker to jump to the section you need to within a larger stylesheet by scanning the ids you know will be there than looking for arbitrary selectors. I think of the ids in my css as I think of headlines in my writing, and conveniently, they even visually differentiate themselves as such.
 
-### Comparison to Other Systems
+# Media Queries
+
+Writing responsive CSS is no longer optional, or an enhancement to the page, it is now an essential for all websites, so it's only fair that we discuss it here as well, since media queries also must fit well into your CSS' structure in order for you to maintain sanity on large builds.
+
+### Rule Placement
+
+The general MPG rule for media queries is that **you should almost never have a selector nested inside a media query**. That means that all your media queries should be placed inline, nested along with all the other css. Of course, you need to be using a preprocessor that supports nested rules and nested media queries in order to make this happen, but those are [not too tough](http://cssnext.io/features/#nesting) to come across these days.
+
+Why? Because responsive styles are no different than normal styles. They are styles that are applied to the element in question, and therefore should be grouped together with that element. So for example, this is the right approach:
+
+```css
+.foo {
+  color: red;
+
+  @media (min-width: 30em) {
+    color: blue;
+  }
+}
+```
+
+This, on the other hand is the wrong approach:
+
+```css
+/* THIS IS WRONG DO NOT DO THIS */
+.foo {
+  color: red;
+}
+
+@media (min-width: 30em) {
+  .foo {
+    color: blue;
+  }
+}
+```
+
+This approach provides the obvious advantage of grouping your styles together in the same place so that any developer knows where to look. It also virtually eliminates the chances of an issue with specificity. For example, in the above example if the media block was places above the `.foo` block, it would not work. Once you get to more complicated nested selectors inside media queries, it gets even more difficult to avoid issues with specificity.
+
+It makes it a little easier to make the mental shift to this way of using media queries if you think of them exactly in the same way that you think of normal styles, because in reality, that's what they are. You would never write a selector block, then another one further down to apply more styles, you would group them together. And media queries are just the same.
+
+### Breakpoints
+
+In the ancient past days when smartphones and tablets were newfangled gadgets, it was permissible and in fact frequently advised that you create and utilize "breakpoints" for your media queries. In these days, it was common to have specific breakpoints that are used across the site, "desktop", "tablet", and "mobile", for example. And honestly, at the time it worked fine because those were the only devices that existed. But now that we have devices with screens of all sizes, the need for any type of device-specific breakpoints is gone.
+
+MPG advises that you create media queries **around the content rather than the device / screen size**. So generally you will size the browser window down, and just before something starts to look awkward, add a media query at that point to fix it. It doesn't matter if the number is clean and even, or how many other elements need to have a media query at that same number, just run it. Then continue doing so for all other elements on the page.
+
+Often times this approach will bother people because there's something mentally nice about having just a few consistent and cleanly named breakpoints. Us humans have a way of enjoying order and cleanliness. But in this case making a breakpoint whenever one is needed is actually the superior approach, as logically there is no benefit to limiting your number of breakpoints. In fact there is a disadvantage, which is that you need to either overcompensate at each breakpoint to ensure that the content is ok until the next one, or have areas in between breakpoints in which the content looks bad.
+
+And for those concerned about CSS size, [gzip eliminates this issue](https://github.com/MoOx/postcss-cssnext/issues/27#issuecomment-53410002) entirely, so calm your worries. And if you are really insistent, you can find [plugins](https://github.com/hail2u/node-css-mqpacker) to run this transform for you against all logic.
+
+# Comparison to Other Systems
 
 There are a few other popular methodologies for writing css out there, but they all suffer from similar issues. We discussed at the beginning where the strengths of MPG are, and these are almost all where the weaknesses of other systems are. Most systems (smacss, bem, oocss) do not use nesting at all. Instead of nesting, these systems propose that you name your selectors in a way that implies nesting, but then ignore the natural cascading of css entirely.For example, you might write normal css or MPG like this:
 
