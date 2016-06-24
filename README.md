@@ -8,7 +8,7 @@ But why a different CSS organization system when there are so many already out t
 
 ### Scoping
 
-One of the biggest potential issues with CSS is what I like to call _scope leaks_. These happen when you write styles for one specific section of a page, but because of the way you made the selection, the styles also affect elements on other random parts of the page. This is a really bad problem, as most of the time you don't recognize it until someone else does. A primary goal of MPG is to scope styles tightly and prevent scope leaks.
+One of the biggest potential issues with CSS is what I like to call _scope leaks_. These happen when you write styles for one specific section of a website, but because of the way you made the selection, the styles also affect elements on other random parts of the site. This is a side effect of CSS being written in the global scope by default. This is a really bad problem, as most of the time you don't recognize it until someone else does. A primary goal of MPG is to scope styles tightly and prevent scope leaks.
 
 ### DRY Code
 
@@ -18,7 +18,7 @@ There are many CSS systems out there at the moment that involve a large amount o
 
 ### Clean Markup
 
-It is nearly universally agreed among programmers that clean code is much better than messy code. This should be the same for html markup. Adding bunches of classes and ids with extra symbols in them to markup makes the markup less clean and _more difficult to read and deal with_. HTML5 was made to include enough vocabulary to be able to define most parts of a website with it's semantics. This should be taken advantage of.
+It is nearly universally agreed among programmers that clean and readable code is much better than messy code. This should be the same for html/css markup. Adding bunches of classes and ids with extra symbols in them to markup makes the markup less clean and _more difficult to read and deal with_. HTML5 was made to include enough vocabulary to be able to define most parts of a website with it's semantics. This should be taken advantage of.
 
 MPG strongly adheres to the philosophy that clean, readable, and semantic markup is of paramount importance to any website, and that the minimal amount of extra words and classes should be added to html in order to get the website styled correctly.
 
@@ -31,6 +31,8 @@ Ok, enough preaching, let's get into the real stuff. MPG divides your css into t
 Some styles are used in multiple places across a website. For example, your `h1` element might consistently look the same (and it should!), or you might have a `.box` class that wraps a piece of content in an elegant box. These are good candidates for global styles. Global styles are great, they give a sense of unity to your site, and should be used frequently. If you've seen something like a branding manual or style guide, these represent global styles.
 
 Since they are intended to be repeated, _global styles should always be classes, never ids_. In the same vein, styles should only be defined as global if and only if they appear on multiple different pages. Finally, to make it clear that a global style is being used, all global classnames should be prefixed with `g-`, as in `.g-box`. If you are styling a raw element like `ul` or `h1` with a global base style, however, it's not necessary to add an extra class.
+
+> If you are working on a large website/app, it is extremely helpful to create a reference page for all global styles. This makes it easier for developers to start working on the project with a good understanding of what these styles are and how they are used.
 
 ### Page/View Specific
 
