@@ -201,6 +201,14 @@ Whereas with BEM for example, it's all classes, and nesting means repeating the 
 
 Not only is this gratuitous repetition, it's ignoring the natural power of css and the natural semantics of html, and is much more work to write and harder to read. And it gets worse and worse the more levels of nesting you have. Remember, CSS stands for Cascading style sheets -- why ignore the main strength of css, then replicate it yourself in a less efficient manner?
 
+### Rules and Strict-ness
+
+MPG is not the type of system that prescribes dogmas that can be followed robotically, and if you stay inside the rule set you are 100% set. It takes a lot of judgement and intuition to apply MPG correctly across any type of site. Categorizing pieces of the site correctly, writing clear and understandable selectors, not over-using classes and wrappers, and using descendant selectors correctly is not something that can be done elegantly with a 100% prescribed system, so you must use your best judgement with these pieces.
+
+The primary aim of MPG is to prevent scope leaks. If you do an even half-decent job of following the rules, you will not run into any situation where you write styles that end up affecting another element somewhere else on your site without noticing. They key is starting out by writing your css at the module level, then pulling it up in scope as necessary. By default, you write css in the global scope, which is exactly the problem. MPG aims to reverse this by forcing you to write at the local scope by default, while also introducing some light organization to your codebase. If you do not follow this practice, you _will_ have scope leaks and not get the benefits of MPG, so do try to be strict about that.
+
+If you have questions and want to ask some other MPG experts, feel free to [join our gitter channel](https://gitter.im/jescalan/mpg) and ask. But remember to slim down your example to the minimum possible code required in order to get the help you need. Ain't nobody got time for reviewing gigantic html and css files for free, so be specific with any issues you are struggling with.
+
 ### Try It!
 
 MPG helps to create clear, readable, and modular html and css. Many other systems ignore the cascade and nesting and for that reason you have to do more work and repeat yourself. This is not the case with MPG, which takes advantage of the natural semantics of html and cascading properties of css to allow clean and quick styling. But the light structure it imposes also creates clear reuseable modules and safety from scope leaks. Give it a shot for your next project and see what you think!
