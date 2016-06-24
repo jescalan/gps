@@ -30,19 +30,25 @@ Some styles are used in multiple places across a website. For example, your `h1`
 
 Since they are intended to be repeated, _global styles should always be classes, never ids_. In the same vein, styles should only be defined as global if and only if they appear on multiple different pages. Finally, to make it clear that a global style is being used, all global classnames should be prefixed with `g-`, as in `.g-box`. If you are styling a raw element like `ul` or `h1` with a global base style, however, it's not necessary to add an extra class.
 
-### Page-Specific
+### Page/View Specific
 
-A "page" can be defined in one of two ways. If you are working with a traditional website that loads new pages on link clicks, it's as easy as that. If you have a single page app that you are using some sort of javascript MV* for, you can define a "page" as a major view that you would never see more than one of on a page at the same time. For example, an item view that's part of a collection would not qualify, as you can and probably will see more than one of them on a page. However, it is possible that the collection's view could be defined as a page, as long as you don't have a collection of collections. You get the idea.
+A "page" (or "view") can be defined in one of two ways. If you are working with a traditional website that loads new pages on link clicks, it's as easy as that. If you have a single page app that you are using some sort of javascript MV* for, you can define a "page" as a major view that you would never see more than one of on a page at the same time. For example, an item view that's part of a collection would not qualify, as you can and probably will see more than one of them on a page. However, it is possible that the collection's view could be defined as a page, as long as you don't have a collection of collections. You get the idea.
+
+The basic criteria that define a page is as such:
+
+1. It is a major view, it would have it's own page in a design mock
+2. It's not even possible that you would ever find more than one in the window at the same time
+3. It contains one or more "modules" (discussed below)
 
 Page-specific styles are styles that _do not apply globally_, but do apply locally to all elements within a specific page. For example, you might have one page where there is a unique color to your header elements across the page.
 
-All pages should have an id with the page's name on the `body` element, to allow for simple scoping across the page. If you are making a single-page app with javascript, the id can apply to the view's wrapper element instead. _All page-specific styles should be scoped under this id_. If this cannot work, they are global styles. **Any CSS that you write that is not global should be scoped under a page's id**.
+All pages should have an id with the page's name on the `body` element, to allow for simple scoping across the page. If you are making a single-page app with javascript, the id can apply to the view's wrapper element instead. _All page-specific styles should be scoped under this id_. If this scope doesn't work for a style you are considering, it is probably a global style. **Any CSS that you write that is not global should always be scoped under a page or view's id**.
 
 ### Module-Specific
 
 This is the most specific level of selection. A module is defined as a section within a page. For example, on your about page, you might have a portion that contains an introductory paragraph, then a section that has some of your company's staff, and a section that has some of the clients you've worked with. Each of these sections would be defined as it's own module, and _since there can only be one of them per page, these are also marked with ids_.
 
-If you are writing styling that applies only to that specific module, it should be nested under at least 2 levels of ids -- the page id and the module id. This is the default place you should put code if you aren't sure, as _there is no chance of a scope leak for code here_. Even if you have a module that is named the same thing coincidentally on another page, it will still not leak because it's scoped under the page id as well. If later on you notice that the same style is actually used elsewhere on the same page, you can pull it up to a page-specific style, and if you notice it being used on other pages, you can pull it up to global. This is the safest route to take, that prevents the most css errors. As soon as you find the need to use a block of css outside of a module, pull it up to a page-level style. And if you need to again outside the page, pull it up to global. If you are copy-pasting blocks of css in order to get around this problem _you are doing it wrong_.
+If you are writing styling that applies only to that specific module, it should be nested under at least 2 levels of ids – the page id and the module id. This is the default place you should put code if you aren't sure, as _there is no chance of a scope leak for code here_. Even if you have a module that is named the same thing coincidentally on another page, it will still not leak because it's scoped under the page id as well. If later on you notice that the same style is actually used elsewhere on the same page, you can pull it up to a page-specific style, and if you notice it being used on other pages, you can pull it up to global. This is the safest route to take, that prevents the most css errors. As soon as you find the need to use a block of css outside of a module, pull it up to a page-level style. And if you need to again outside the page, pull it up to global. If you are copy-pasting blocks of css in order to get around this problem _you are doing it wrong_.
 
 # An Example
 
