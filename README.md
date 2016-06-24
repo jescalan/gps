@@ -91,7 +91,7 @@ Ok, so this is some fairly straightforward stuff here, nothing crazy. Note how e
 
 _global.css_
 
-```
+```css
 h1
 p
 .g-full-width
@@ -102,7 +102,7 @@ Notice how there's no nesting here. The only time you should see nesting in the 
 
 _index.css_
 
-```
+```css
 #index
   .left
   .right
@@ -116,7 +116,7 @@ So here we see a nice clean structure. You'll notice that perhaps the h1 in the 
 
 _about.css_
 
-```
+```css
 #about
   #intro
     p
@@ -181,14 +181,14 @@ And for those concerned about CSS size, [gzip eliminates this issue](https://git
 
 There are a few other popular methodologies for writing css out there, but they all suffer from similar issues. We discussed at the beginning where the strengths of MPG are, and these are almost all where the weaknesses of other systems are. Most systems (smacss, bem, oocss) do not use nesting at all. Instead of nesting, these systems propose that you name your selectors in a way that implies nesting, but then ignore the natural cascading of css entirely.For example, you might write normal css or MPG like this:
 
-```
+```css
 #menu
   li
 ```
 
 Whereas with BEM for example, it's all classes, and nesting means repeating the word in the class, like this:
 
-```
+```css
 .menu
 .menu__item
 ```
