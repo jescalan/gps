@@ -1,8 +1,8 @@
-# MPG CSS
+# GPS CSS Methodology
 
-[![Join the chat at https://gitter.im/jescalan/mpg](https://badges.gitter.im/jescalan/mpg.svg)](https://gitter.im/jescalan/mpg?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter Chat](https://badges.gitter.im/jescalan/gps.svg)](https://gitter.im/jescalan/gps)
 
-This is a methodology for organizing css that has worked quite well over a large variety of projects. The name stands for **M**odule **P**age **G**lobal, which is how chunks of css are organized according to this approach.
+This is a methodology for organizing css that has worked quite well over a large variety of projects. The name stands for **G**lobal **P**age **S**ection, which is how chunks of css are organized according to this approach.
 
 But why a different CSS organization system when there are so many already out there? Let's get into it.
 
@@ -24,7 +24,7 @@ MPG strongly adheres to the philosophy that clean, readable, and semantic markup
 
 # The Method
 
-Ok, enough preaching, let's get into the real stuff. MPG divides your css into three levels: global, page-specific, and module-specific. Let's break each of these down individually.
+Ok, enough preaching, let's get into the real stuff. MPG divides your css into three levels: global, page-specific, and section-specific. Let's break each of these down individually.
 
 ### Global
 
@@ -42,17 +42,17 @@ The basic criteria that define a page is as such:
 
 1. It is a major view, it would have it's own page in a design mock
 2. It's not even possible that you would ever find more than one in the window at the same time
-3. It contains one or more "modules" (discussed below)
+3. It contains one or more "sections" (discussed below)
 
 Page-specific styles are styles that _do not apply globally_, but do apply locally to all elements within a specific page. For example, you might have one page where there is a unique color to your header elements across the page.
 
 All pages should have an id with the page's name on the `body` element, to allow for simple scoping across the page. If you are making a single-page app with javascript, the id can apply to the view's wrapper element instead. _All page-specific styles should be scoped under this id_. If this scope doesn't work for a style you are considering, it is probably a global style. **Any CSS that you write that is not global should always be scoped under a page or view's id**.
 
-### Module-Specific
+### Section-Specific
 
-This is the most specific level of selection. A module is defined as a section within a page. For example, on your about page, you might have a portion that contains an introductory paragraph, then a section that has some of your company's staff, and a section that has some of the clients you've worked with. Each of these sections would be defined as it's own module, and _since there can only be one of them per page, these are also marked with ids_.
+This is the most specific level of selection. A section is defined as a section within a page. For example, on your about page, you might have a portion that contains an introductory paragraph, then a section that has some of your company's staff, and a section that has some of the clients you've worked with. Each of these sections would be defined as it's own section, and _since there can only be one of them per page, these are also marked with ids_.
 
-If you are writing styling that applies only to that specific module, it should be nested under at least 2 levels of ids – the page id and the module id. This is the default place you should put code if you aren't sure, as _there is no chance of a scope leak for code here_. Even if you have a module that is named the same thing coincidentally on another page, it will still not leak because it's scoped under the page id as well. If later on you notice that the same style is actually used elsewhere on the same page, you can pull it up to a page-specific style, and if you notice it being used on other pages, you can pull it up to global. This is the safest route to take, that prevents the most css errors. As soon as you find the need to use a block of css outside of a module, pull it up to a page-level style. And if you need to again outside the page, pull it up to global. If you are copy-pasting blocks of css in order to get around this problem _you are doing it wrong_.
+If you are writing styling that applies only to that specific section, it should be nested under at least 2 levels of ids – the page id and the section id. This is the default place you should put code if you aren't sure, as _there is no chance of a scope leak for code here_. Even if you have a section that is named the same thing coincidentally on another page, it will still not leak because it's scoped under the page id as well. If later on you notice that the same style is actually used elsewhere on the same page, you can pull it up to a page-specific style, and if you notice it being used on other pages, you can pull it up to global. This is the safest route to take, that prevents the most css errors. As soon as you find the need to use a block of css outside of a section, pull it up to a page-level style. And if you need to again outside the page, pull it up to global. If you are copy-pasting blocks of css in order to get around this problem _you are doing it wrong_.
 
 # An Example
 
@@ -209,9 +209,9 @@ Not only is this gratuitous repetition, it's ignoring the natural power of css a
 
 MPG is not the type of system that prescribes dogmas that can be followed robotically, and if you stay inside the rule set you are 100% set. It takes a lot of judgement and intuition to apply MPG correctly across any type of site. Categorizing pieces of the site correctly, writing clear and understandable selectors, not over-using classes and wrappers, and using descendant selectors correctly is not something that can be done elegantly with a 100% prescribed system, so you must use your best judgement with these pieces.
 
-The primary aim of MPG is to prevent scope leaks. If you do an even half-decent job of following the rules, you will not run into any situation where you write styles that end up affecting another element somewhere else on your site without noticing. They key is starting out by writing your css at the module level, then pulling it up in scope as necessary. By default, you write css in the global scope, which is exactly the problem. MPG aims to reverse this by forcing you to write at the local scope by default, while also introducing some light organization to your codebase. If you do not follow this practice, you _will_ have scope leaks and not get the benefits of MPG, so do try to be strict about that.
+The primary aim of MPG is to prevent scope leaks. If you do an even half-decent job of following the rules, you will not run into any situation where you write styles that end up affecting another element somewhere else on your site without noticing. They key is starting out by writing your css at the section level, then pulling it up in scope as necessary. By default, you write css in the global scope, which is exactly the problem. MPG aims to reverse this by forcing you to write at the local scope by default, while also introducing some light organization to your codebase. If you do not follow this practice, you _will_ have scope leaks and not get the benefits of MPG, so do try to be strict about that.
 
-If you have questions and want to ask some other MPG experts, feel free to [join our gitter channel](https://gitter.im/jescalan/mpg) and ask. But remember to slim down your example to the minimum possible code required in order to get the help you need. Ain't nobody got time for reviewing gigantic html and css files for free, so be specific with any issues you are struggling with.
+If you have questions and want to ask some other MPG experts, feel free to [join our gitter channel](https://gitter.im/jescalan/gps) and ask. But remember to slim down your example to the minimum possible code required in order to get the help you need. Ain't nobody got time for reviewing gigantic html and css files for free, so be specific with any issues you are struggling with.
 
 ### Try It!
 
