@@ -1,5 +1,7 @@
 # MPG CSS
 
+[![Join the chat at https://gitter.im/jescalan/mpg](https://badges.gitter.im/jescalan/mpg.svg)](https://gitter.im/jescalan/mpg?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This is a methodology for organizing css that has worked quite well over a large variety of projects. The name stands for **M**odule **P**age **G**lobal, which is how chunks of css are organized according to this approach.
 
 But why a different CSS organization system when there are so many already out there? Let's get into it.
