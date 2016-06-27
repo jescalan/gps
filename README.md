@@ -8,23 +8,23 @@ But why a different CSS organization system when there are so many already out t
 
 ### Scoping
 
-One of the biggest potential issues with CSS is what I like to call _scope leaks_. These happen when you write styles for one specific section of a website, but because of the way you made the selection, the styles also affect elements on other random parts of the site. This is a side effect of CSS being written in the global scope by default. This is a really bad problem, as most of the time you don't recognize it until someone else does. A primary goal of MPG is to scope styles tightly and prevent scope leaks.
+One of the biggest potential issues with CSS is what I like to call _scope leaks_. These happen when you write styles for one specific section of a website, but because of the way you made the selection, the styles also affect elements on other random parts of the site. This is a side effect of CSS being written in the global scope by default. This is a really bad problem, as most of the time you don't recognize it until someone else does. A primary goal of GPS is to scope styles tightly and prevent scope leaks.
 
 ### DRY Code
 
 In programming, ["Don't Repeat Yourself" (DRY)](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) is a manifesto that hardly any programmers disagree with. The reasoning behind this is very sound: repeating yourself is a waste of time, and allows more opportunity for error when you change once repeated instance but not the other. In css, this is also very important, and has become much easier to do with the advent of great css preprocessors which allow variables, nesting, mixins, and more.
 
-There are many CSS systems out there at the moment that involve a large amount of repetition. MPG very specifically tries to avoid any type of repetition.
+There are many CSS systems out there at the moment that involve a large amount of repetition. GPS very specifically tries to avoid any type of repetition.
 
 ### Clean Markup
 
 It is nearly universally agreed among programmers that clean and readable code is much better than messy code. This should be the same for html/css markup. Adding bunches of classes and ids with extra symbols in them to markup makes the markup less clean and _more difficult to read and deal with_. HTML5 was made to include enough vocabulary to be able to define most parts of a website with it's semantics. This should be taken advantage of.
 
-MPG strongly adheres to the philosophy that clean, readable, and semantic markup is of paramount importance to any website, and that the minimal amount of extra words and classes should be added to html in order to get the website styled correctly.
+GPS strongly adheres to the philosophy that clean, readable, and semantic markup is of paramount importance to any website, and that the minimal amount of extra words and classes should be added to html in order to get the website styled correctly.
 
 # The Method
 
-Ok, enough preaching, let's get into the real stuff. MPG divides your css into three levels: global, page-specific, and section-specific. Let's break each of these down individually.
+Ok, enough preaching, let's get into the real stuff. GPS divides your css into three levels: global, page-specific, and section-specific. Let's break each of these down individually.
 
 ### Global
 
@@ -144,7 +144,7 @@ Writing responsive CSS is no longer optional, or an enhancement to the page, it 
 
 ### Rule Placement
 
-The general MPG rule for media queries is that **you should almost never have a selector nested inside a media query**. That means that all your media queries should be placed inline, nested along with all the other css. Of course, you need to be using a preprocessor that supports nested rules and nested media queries in order to make this happen, but those are [not too tough](http://cssnext.io/features/#nesting) to come across these days.
+The general GPS rule for media queries is that **you should almost never have a selector nested inside a media query**. That means that all your media queries should be placed inline, nested along with all the other css. Of course, you need to be using a preprocessor that supports nested rules and nested media queries in order to make this happen, but those are [not too tough](http://cssnext.io/features/#nesting) to come across these days.
 
 Why? Because responsive styles are no different than normal styles. They are styles that are applied to the element in question, and therefore should be grouped together with that element. So for example, this is the right approach:
 
@@ -161,7 +161,7 @@ Why? Because responsive styles are no different than normal styles. They are sty
 This, on the other hand is the wrong approach:
 
 ```css
-/* THIS IS WRONG DO NOT DO THIS */
+/* THIS IS WRONG. DO NOT DO THIS. */
 .foo {
   color: red;
 }
@@ -181,7 +181,7 @@ It makes it a little easier to make the mental shift to this way of using media 
 
 In the ancient past days when smartphones and tablets were newfangled gadgets, it was permissible and in fact frequently advised that you create and utilize "breakpoints" for your media queries. In these days, it was common to have specific breakpoints that are used across the site, "desktop", "tablet", and "mobile", for example. And honestly, at the time it worked fine because those were the only devices that existed. But now that we have devices with screens of all sizes, the need for any type of device-specific breakpoints is gone.
 
-MPG advises that you create media queries **around the content rather than the device / screen size**. So generally you will size the browser window down, and just before something starts to look awkward, add a media query at that point to fix it. It doesn't matter if the number is clean and even, or how many other elements need to have a media query at that same number, just run it. Then continue doing so for all other elements on the page.
+GPS advises that you create media queries **around the content rather than the device / screen size**. So generally you will size the browser window down, and just before something starts to look awkward, add a media query at that point to fix it. It doesn't matter if the number is clean and even, or how many other elements need to have a media query at that same number, just run it. Then continue doing so for all other elements on the page.
 
 Often times this approach will bother people because there's something mentally nice about having just a few consistent and cleanly named breakpoints. Us humans have a way of enjoying order and cleanliness. But in this case making a breakpoint whenever one is needed is actually the superior approach, as logically there is no benefit to limiting your number of breakpoints. In fact there is a disadvantage, which is that you need to either overcompensate at each breakpoint to ensure that the content is ok until the next one, or have areas in between breakpoints in which the content looks bad.
 
@@ -189,7 +189,7 @@ And for those concerned about CSS size, [gzip eliminates this issue](https://git
 
 # Comparison to Other Systems
 
-There are a few other popular methodologies for writing css out there, but they all suffer from similar issues. We discussed at the beginning where the strengths of MPG are, and these are almost all where the weaknesses of other systems are. Most systems (smacss, bem, oocss) do not use nesting at all. Instead of nesting, these systems propose that you name your selectors in a way that implies nesting, but then ignore the natural cascading of css entirely.For example, you might write normal css or MPG like this:
+There are a few other popular methodologies for writing css out there, but they all suffer from similar issues. We discussed at the beginning where the strengths of GPS are, and these are almost all where the weaknesses of other systems are. Most systems (smacss, bem, oocss) do not use nesting at all. Instead of nesting, these systems propose that you name your selectors in a way that implies nesting, but then ignore the natural cascading of css entirely.For example, you might write normal css or GPS like this:
 
 ```css
 #menu
@@ -207,12 +207,12 @@ Not only is this gratuitous repetition, it's ignoring the natural power of css a
 
 ### Rules and Strict-ness
 
-MPG is not the type of system that prescribes dogmas that can be followed robotically, and if you stay inside the rule set you are 100% set. It takes a lot of judgement and intuition to apply MPG correctly across any type of site. Categorizing pieces of the site correctly, writing clear and understandable selectors, not over-using classes and wrappers, and using descendant selectors correctly is not something that can be done elegantly with a 100% prescribed system, so you must use your best judgement with these pieces.
+GPS is not the type of system that prescribes dogmas that can be followed robotically, and if you stay inside the rule set you are 100% set. It takes a lot of judgement and intuition to apply GPS correctly across any type of site. Categorizing pieces of the site correctly, writing clear and understandable selectors, not over-using classes and wrappers, and using descendant selectors correctly is not something that can be done elegantly with a 100% prescribed system, so you must use your best judgement with these pieces.
 
-The primary aim of MPG is to prevent scope leaks. If you do an even half-decent job of following the rules, you will not run into any situation where you write styles that end up affecting another element somewhere else on your site without noticing. They key is starting out by writing your css at the section level, then pulling it up in scope as necessary. By default, you write css in the global scope, which is exactly the problem. MPG aims to reverse this by forcing you to write at the local scope by default, while also introducing some light organization to your codebase. If you do not follow this practice, you _will_ have scope leaks and not get the benefits of MPG, so do try to be strict about that.
+The primary aim of GPS is to prevent scope leaks. If you do an even half-decent job of following the rules, you will not run into any situation where you write styles that end up affecting another element somewhere else on your site without noticing. They key is starting out by writing your css at the section level, then pulling it up in scope as necessary. By default, you write css in the global scope, which is exactly the problem. GPS aims to reverse this by forcing you to write at the local scope by default, while also introducing some light organization to your codebase. If you do not follow this practice, you _will_ have scope leaks and not get the benefits of GPS, so do try to be strict about that.
 
-If you have questions and want to ask some other MPG experts, feel free to [join our gitter channel](https://gitter.im/jescalan/gps) and ask. But remember to slim down your example to the minimum possible code required in order to get the help you need. Ain't nobody got time for reviewing gigantic html and css files for free, so be specific with any issues you are struggling with.
+If you have questions and want to ask some other GPS experts, feel free to [join our gitter channel](https://gitter.im/jescalan/gps) and ask. But remember to slim down your example to the minimum possible code required in order to get the help you need. Ain't nobody got time for reviewing gigantic html and css files for free, so be specific with any issues you are struggling with.
 
 ### Try It!
 
-MPG helps to create clear, readable, and modular html and css. Many other systems ignore the cascade and nesting and for that reason you have to do more work and repeat yourself. This is not the case with MPG, which takes advantage of the natural semantics of html and cascading properties of css to allow clean and quick styling. But the light structure it imposes also creates clear reuseable modules and safety from scope leaks. Give it a shot for your next project and see what you think!
+GPS helps to create clear, readable, and modular html and css. Many other systems ignore the cascade and nesting and for that reason you have to do more work and repeat yourself. This is not the case with GPS, which takes advantage of the natural semantics of html and cascading properties of css to allow clean and quick styling. But the light structure it imposes also creates clear reuseable modules and safety from scope leaks. Give it a shot for your next project and see what you think!
