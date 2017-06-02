@@ -114,7 +114,7 @@ p
 .g-half-width
 ```
 
-Notice how there's no nesting here. The only time you should see nesting in the global CSS file is if you are handling some sort of hover or active properties, or if you have a global style that comprises multiple elements (which, to be fair, does definitely happen, like the media class). These are all resuseable styles across the entire site.
+Notice how there's no nesting here. The only time you should see nesting in the global CSS file is if you are handling some sort of hover or active properties, or if you have a global style that comprises multiple elements (which, to be fair, does definitely happen, like the media class). These are all reuseable styles across the entire site.
 
 _index.css_
 
