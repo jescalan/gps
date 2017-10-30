@@ -54,6 +54,8 @@ Page-specific styles are styles that _do not apply globally_, but do apply local
 
 All pages should have an id with the page's name on the `body` element, to allow for simple scoping across the page. If you are making a single-page app with JavaScript, the id can apply to the view's wrapper element instead. _All page-specific styles should be scoped under this id_. If this scope doesn't work for a style you are considering, it is probably a global style. **Any CSS that you write that is not global should always be scoped under a page or view's id**.
 
+Page ids are also typically prefixed with `p-` to ensure that there are no conflicts with anchor links or internal sections on other pages. For example, if you did not use the `p-` prefix, you could have a page called `company`, which would be defined globally as a page level scope, and a section on your about page called `company` that is an anchor link. In this case you would have a scope leak. Prefixing page-level styles would ensure that this doesn't happen. Generally, any time you are writing a style that is globally scoped it should be prefixed to avoid accidental conflicts. This is why global styles start with `g-` and page styles start with `p-`.
+
 ### Section-Specific
 
 This is the most specific level of selection. A section is defined as a section within a page. For example, on your about page, you might have a portion that contains an introductory paragraph, then a section that has some of your company's staff, and a section that has some of the clients you've worked with. Each of these sections would be defined as it's own section, and _since there can only be one of them per page, these are also marked with ids_.
@@ -67,7 +69,7 @@ With the theory out of the way, let's look at an example site. This site consist
 ### Home Page
 
 ```html
-<body id='index'>
+<body id='p-index'>
 
   <div id='banner'>
     <h1>Welcome to the Example Page!</h1>
@@ -86,7 +88,7 @@ With the theory out of the way, let's look at an example site. This site consist
 ### About Page
 
 ```html
-<body id='about'>
+<body id='p-about'>
 
   <h1>About Us</h1>
 
@@ -119,7 +121,7 @@ Notice how there's no nesting here. The only time you should see nesting in the 
 _index.css_
 
 ```css
-#index
+#p-index
   .left
   .right
   #banner
@@ -133,7 +135,7 @@ So here we see a nice clean structure. You'll notice that perhaps the `h1`in the
 _about.css_
 
 ```css
-#about
+#p-about
   #intro
     p
   #staff
@@ -209,7 +211,7 @@ Whereas with BEM for example, it's all classes, and nesting means repeating the 
 .menu__item
 ```
 
-Not only is this gratuitous repetition, it's ignoring the natural power of CSS and the natural semantics of HTML, and is much more work to write and harder to read. And it gets worse and worse the more levels of nesting you have. Remember, CSS stands for **C**ascading **S**tyle **S**heets -- why ignore the main strength of CSS, then replicate it yourself in a less efficient manner?
+Not only is this gratuitous repetition, it's ignoring the natural power of CSS and the natural semantics of HTML, and is much more work to write and harder to read. And it gets worse and worse the more levels of nesting you have. Nesting in the DOM is an extremely effective way to control and organize your markup, why ignore this strength to favor a more repetitive and less clear strategy?
 
 ### Rules and Strict-ness
 
